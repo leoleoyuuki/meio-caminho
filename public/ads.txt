@@ -1,0 +1,5 @@
+# Google ads.txt
+# Substitua o "pub-XXXXXXXXXXXXXXXX" com o seu ID real de publicador do Google AdSense
+# Exemplo: google.com, pub-1234567890123456, DIRECT, f08c47fec0942fa0
+
+google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

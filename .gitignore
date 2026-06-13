@@ -1,0 +1,11 @@
+# Dependency directories
+node_modules/
+
+# Local env files
+.env
+
+# System/IDE files
+.gemini/
+*.log
+.DS_Store
+Thumbs.db
