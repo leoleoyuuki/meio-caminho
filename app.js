@@ -421,6 +421,7 @@ async function handleCalculation() {
     } finally {
         loadingState.classList.add('hidden');
         btnCalculate.disabled = false;
+    }
 }
 
 // Render Results on UI

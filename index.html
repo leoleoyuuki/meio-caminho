@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meio do Caminho - Encontre o ponto de encontro perfeito</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <!-- Leaflet.js CSS for Map fallback/standard rendering -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <link rel="stylesheet" href="style.css">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google AdSense Main Script -->
+    <!-- Google AdSense Main Script (Comentado até que as chaves reais sejam inseridas) -->
     <!-- IMPORTANTE: Substitua o identificador ca-pub-XXXXXXXXXXXXXXXX com o seu ID real de publicador do AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
 </head>
+
 <body>
     <div class="app-container">
         <!-- Sidebar / Control Panel -->
@@ -28,7 +32,8 @@
                     </div>
                     <h1>Meio do <span class="accent-text">Caminho</span></h1>
                 </div>
-                <p class="subtitle">Encontre o lugar ideal para se reunir, vender, comprar ou namorar no ponto médio perfeito.</p>
+                <p class="subtitle">Encontre o lugar ideal para se reunir, vender, comprar ou namorar no ponto médio
+                    perfeito.</p>
             </header>
 
             <main class="sidebar-content">
@@ -69,9 +74,11 @@
                             <label for="api-key-google">Chave API Google Maps (Opcional)</label>
                             <div class="input-wrapper">
                                 <i class="fa-brands fa-google input-icon"></i>
-                                <input type="password" id="api-key-google" placeholder="Cole sua chave Google Maps aqui para ativar Google Maps">
+                                <input type="password" id="api-key-google"
+                                    placeholder="Cole sua chave Google Maps aqui para ativar Google Maps">
                             </div>
-                            <small class="help-text">Se deixado em branco, usaremos o Leaflet com um mapa interativo premium.</small>
+                            <small class="help-text">Se deixado em branco, usaremos o Leaflet com um mapa interativo
+                                premium.</small>
                         </div>
                         <div class="input-group">
                             <label>Tipo de Lugares Preferidos</label>
@@ -119,7 +126,8 @@
                             </div>
                         </div>
                         <div class="midpoint-details">
-                            <p class="address"><i class="fa-solid fa-map-location-dot"></i> <span id="midpoint-address">Rua Exemplo, 123 - Cidade, UF</span></p>
+                            <p class="address"><i class="fa-solid fa-map-location-dot"></i> <span
+                                    id="midpoint-address">Rua Exemplo, 123 - Cidade, UF</span></p>
                             <div class="stats-grid">
                                 <div class="stat-item">
                                     <span class="stat-label">Distância A</span>
@@ -165,21 +173,19 @@
         <!-- Map Container -->
         <main class="map-view">
             <div id="map"></div>
-            
+
             <!-- Google AdSense - Centro-Topo Overlay -->
             <div class="adsense-card adsense-top-center">
                 <div class="adsense-header">
                     <span class="adsense-tag">Anúncio • Google AdSense</span>
                 </div>
                 <!-- Unidade de Anúncio AdSense Centro-Topo -->
-                <ins class="adsbygoogle"
-                     style="display:inline-block;width:468px;height:60px"
-                     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                     data-ad-slot="TOP_CENTER_SLOT_ID"></ins>
-                <script>
+                <ins class="adsbygoogle" style="display:inline-block;width:468px;height:60px"
+                    data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="TOP_CENTER_SLOT_ID"></ins>
+                <!-- <script>
                      (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-                
+                </script> -->
+
                 <!-- Fallback Visual para Desenvolvimento -->
                 <div class="adsense-placeholder-content">
                     <i class="fa-solid fa-rectangle-ad"></i>
@@ -194,14 +200,12 @@
                     <span class="adsense-tag">Anúncio • AdSense</span>
                 </div>
                 <!-- Unidade de Anúncio AdSense Direita-Centro -->
-                <ins class="adsbygoogle"
-                     style="display:inline-block;width:160px;height:300px"
-                     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                     data-ad-slot="RIGHT_CENTER_SLOT_ID"></ins>
-                <script>
+                <ins class="adsbygoogle" style="display:inline-block;width:160px;height:300px"
+                    data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="RIGHT_CENTER_SLOT_ID"></ins>
+                <!-- <script>
                      (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-                
+                </script> -->
+
                 <!-- Fallback Visual para Desenvolvimento -->
                 <div class="adsense-placeholder-content">
                     <i class="fa-solid fa-ad"></i>
@@ -222,8 +226,10 @@
     </div>
 
     <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <!-- App script -->
     <script src="app.js"></script>
 </body>
+
 </html>
