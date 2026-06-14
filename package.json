@@ -2,7 +2,7 @@
   "name": "meio-caminho",
   "version": "1.0.0",
   "description": "Encontre o ponto de encontro perfeito entre dois locais",
-  "main": "server.js",
+  "main": "api/index.js",
   "scripts": {
     "start": "node api/index.js",
     "dev": "node --watch api/index.js"
