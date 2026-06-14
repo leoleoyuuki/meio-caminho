@@ -4,8 +4,8 @@
   "description": "Encontre o ponto de encontro perfeito entre dois locais",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js"
+    "start": "node api/index.js",
+    "dev": "node --watch api/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

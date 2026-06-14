@@ -9,8 +9,8 @@ const PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from the root directory
-app.use(express.static(__dirname));
+// Serve static files from the parent (root) directory
+app.use(express.static(path.join(__dirname, '..')));
 
 // POST endpoint to handle calculation via Gemini API
 app.post('/api/calculate', async (req, res) => {
@@ -84,9 +84,13 @@ Estrutura de resposta obrigatória:
 
 // Fallback to serve index.html for single page routing
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
-app.listen(PORT, () => {
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Servidor rodando em http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;
