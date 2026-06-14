@@ -1,12 +1,7 @@
 {
   "functions": {
     "api/index.js": {
-      "includeFiles": [
-        "index.html",
-        "style.css",
-        "app.js",
-        "public/ads.txt"
-      ]
+      "includeFiles": "*.{html,css,js}"
     }
   },
   "rewrites": [
