@@ -50,21 +50,21 @@ function updateMap(data) {
     // Custom Marker Icons
     const iconA = L.divIcon({
         className: 'custom-div-icon',
-        html: `<div style="background-color: #EF4444; width: 14px; height: 14px; border: 2px solid white; border-radius: 50%; box-shadow: 0 0 10px rgba(239, 68, 68, 0.8);"></div>`,
+        html: `<div style="background-color: #EF4444; width: 14px; height: 14px; border: 2px solid white; border-radius: 50%; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);"></div>`,
         iconSize: [14, 14],
         iconAnchor: [7, 7]
     });
 
     const iconB = L.divIcon({
         className: 'custom-div-icon',
-        html: `<div style="background-color: #3B82F6; width: 14px; height: 14px; border: 2px solid white; border-radius: 50%; box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);"></div>`,
+        html: `<div style="background-color: #3B82F6; width: 14px; height: 14px; border: 2px solid white; border-radius: 50%; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);"></div>`,
         iconSize: [14, 14],
         iconAnchor: [7, 7]
     });
 
     const iconMid = L.divIcon({
         className: 'custom-div-icon',
-        html: `<div style="background-color: #10B981; width: 22px; height: 22px; border: 3px solid white; border-radius: 50%; box-shadow: 0 0 15px rgba(16, 185, 129, 0.8); display: flex; align-items: center; justify-content: center; color: white;"><i class="fa-solid fa-flag" style="font-size: 10px;"></i></div>`,
+        html: `<div style="background-color: #16A34A; width: 22px; height: 22px; border: 3px solid white; border-radius: 50%; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); display: flex; align-items: center; justify-content: center; color: white;"><i class="bi bi-flag-fill" style="font-size: 10px;"></i></div>`,
         iconSize: [22, 22],
         iconAnchor: [11, 11]
     });
@@ -91,9 +91,9 @@ function updateMap(data) {
         [pointB.lat, pointB.lng]
     ];
     routeLine = L.polyline(latlngs, {
-        color: '#6366F1',
+        color: '#2563EB',
         weight: 4,
-        opacity: 0.6,
+        opacity: 0.7,
         dashArray: '10, 10',
         lineCap: 'round'
     }).addTo(map);
@@ -101,12 +101,12 @@ function updateMap(data) {
     // Add establishment markers
     establishments.forEach((est, index) => {
         const isSp = est.isSponsored;
-        const color = isSp ? '#10B981' : '#8B5CF6';
-        const innerHtml = isSp ? '<i class="fa-solid fa-star" style="font-size: 8px;"></i>' : index;
+        const color = isSp ? '#16A34A' : '#4F46E5';
+        const innerHtml = isSp ? '<i class="bi bi-star-fill" style="font-size: 8px;"></i>' : index;
 
         const estIcon = L.divIcon({
             className: 'custom-div-icon',
-            html: `<div style="background-color: ${color}; width: 18px; height: 18px; border: 2px solid white; border-radius: 50%; box-shadow: 0 0 8px ${color}; display: flex; align-items: center; justify-content: center; color: white; font-size: 9px; font-weight: bold;">${innerHtml}</div>`,
+            html: `<div style="background-color: ${color}; width: 18px; height: 18px; border: 2px solid white; border-radius: 50%; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25); display: flex; align-items: center; justify-content: center; color: white; font-size: 9px; font-weight: bold;">${innerHtml}</div>`,
             iconSize: [18, 18],
             iconAnchor: [9, 9]
         });
@@ -142,19 +142,23 @@ function setupEventListeners() {
     // Calculate click
     btnCalculate.addEventListener('click', handleCalculation);
 
-    // PIX copy listener
+    // PIX copy listeners
     const pixCard = document.getElementById('pix-copy-card');
     if (pixCard) {
-        pixCard.addEventListener('click', handlePixCopy);
+        pixCard.addEventListener('click', () => handlePixCopy('pix-key-value', 'pix-copy-card', 'pix-copy-status', 'pix-copy-icon-symbol'));
+    }
+    const pixCardOverlay = document.getElementById('pix-copy-card-overlay');
+    if (pixCardOverlay) {
+        pixCardOverlay.addEventListener('click', () => handlePixCopy('pix-key-value-overlay', 'pix-copy-card-overlay', 'pix-copy-status-overlay', 'pix-copy-icon-symbol-overlay'));
     }
 }
 
 // Helper: Copy PIX key to clipboard
-async function handlePixCopy() {
-    const pixKeyValue = document.getElementById('pix-key-value').textContent;
-    const pixCard = document.getElementById('pix-copy-card');
-    const pixCopyStatus = document.getElementById('pix-copy-status');
-    const pixCopyIcon = document.getElementById('pix-copy-icon-symbol');
+async function handlePixCopy(keyId, cardId, statusId, iconId) {
+    const pixKeyValue = document.getElementById(keyId).textContent;
+    const pixCard = document.getElementById(cardId);
+    const pixCopyStatus = document.getElementById(statusId);
+    const pixCopyIcon = document.getElementById(iconId);
 
     try {
         await navigator.clipboard.writeText(pixKeyValue);
@@ -163,7 +167,7 @@ async function handlePixCopy() {
         pixCard.classList.add('copied');
         pixCopyStatus.textContent = 'Chave copiada com sucesso!';
         if (pixCopyIcon) {
-            pixCopyIcon.className = 'fa-solid fa-check';
+            pixCopyIcon.className = 'bi bi-check-lg';
         }
 
         // Reset after 2.5 seconds
@@ -171,7 +175,7 @@ async function handlePixCopy() {
             pixCard.classList.remove('copied');
             pixCopyStatus.textContent = 'Clique para copiar a chave';
             if (pixCopyIcon) {
-                pixCopyIcon.className = 'fa-regular fa-copy';
+                pixCopyIcon.className = 'bi bi-copy';
             }
         }, 2500);
     } catch (err) {
@@ -440,25 +444,25 @@ function renderResults(data) {
         const isSp = est.isSponsored;
         card.className = isSp ? 'place-card sponsored' : 'place-card';
         
-        let iconHtml = '<i class="fa-solid fa-mug-hot"></i>';
-        if (selectedPlaceType.includes('shopping')) iconHtml = '<i class="fa-solid fa-bag-shopping"></i>';
-        if (selectedPlaceType.includes('coworking')) iconHtml = '<i class="fa-solid fa-laptop-code"></i>';
-        if (selectedPlaceType.includes('parque')) iconHtml = '<i class="fa-solid fa-tree"></i>';
+        let iconHtml = '<i class="bi bi-cup-hot"></i>';
+        if (selectedPlaceType.includes('shopping')) iconHtml = '<i class="bi bi-bag"></i>';
+        if (selectedPlaceType.includes('coworking')) iconHtml = '<i class="bi bi-laptop"></i>';
+        if (selectedPlaceType.includes('parque')) iconHtml = '<i class="bi bi-tree"></i>';
 
         const labelHtml = isSp 
-            ? `<span style="color: #10B981;"><i class="fa-solid fa-star"></i></span>` 
+            ? `<span style="color: #16A34A;"><i class="bi bi-star-fill"></i></span>` 
             : `${index}.`;
 
         card.innerHTML = `
-            <div class="place-icon-container" style="${isSp ? 'background: rgba(16, 185, 129, 0.1); color: #10B981;' : ''}">
-                ${isSp ? '<i class="fa-solid fa-store"></i>' : iconHtml}
+            <div class="place-icon-container" style="${isSp ? 'background: rgba(22, 163, 74, 0.1); color: #16A34A;' : ''}">
+                ${isSp ? '<i class="bi bi-shop"></i>' : iconHtml}
             </div>
             <div class="place-info">
                 <h4>${labelHtml} ${est.name} ${isSp ? '<span class="badge-sponsored">Patrocinado</span>' : ''}</h4>
                 <p class="description">${est.description}</p>
                 <div class="place-meta">
-                    <span><i class="fa-solid fa-star" style="color: #FBBF24;"></i> ${est.averageRating || '4.5'}</span>
-                    <span><i class="fa-solid fa-location-dot"></i> ${est.address}</span>
+                    <span><i class="bi bi-star-fill" style="color: #FBBF24;"></i> ${est.averageRating || '4.5'}</span>
+                    <span><i class="bi bi-geo-alt"></i> ${est.address}</span>
                 </div>
             </div>
         `;
@@ -485,8 +489,42 @@ function renderResults(data) {
     resultsSection.classList.remove('hidden');
 }
 
+// Setup Theme Toggle
+function setupThemeToggle() {
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleIcon = document.getElementById('theme-toggle-icon');
+    
+    if (!themeToggleBtn || !themeToggleIcon) return;
+
+    // Check for saved theme preference, otherwise use system preference
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+        document.body.classList.add('dark-theme');
+        themeToggleIcon.className = 'bi bi-sun-fill';
+    } else {
+        document.body.classList.remove('dark-theme');
+        themeToggleIcon.className = 'bi bi-moon-fill';
+    }
+
+    // Toggle theme on click
+    themeToggleBtn.addEventListener('click', () => {
+        const isDark = document.body.classList.toggle('dark-theme');
+        
+        if (isDark) {
+            themeToggleIcon.className = 'bi bi-sun-fill';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            themeToggleIcon.className = 'bi bi-moon-fill';
+            localStorage.setItem('theme', 'light');
+        }
+    });
+}
+
 // Initialize on Load
 window.addEventListener('DOMContentLoaded', () => {
     initMap();
+    setupThemeToggle();
     setupEventListeners();
 });
